@@ -5,7 +5,7 @@ import { Candidate, Timesheet } from '@/types';
 import { getPendingActionsSummary, areAllTimesheetsUploaded } from '@/utils';
 import { useCandidates, useTimesheets, useAutomaticTimesheetGeneration } from '@/hooks';
 import { Header, StatusNotifications } from '@/components/layout';
-import { CandidateList } from '@/components/candidate';
+import { CompanyView } from '@/components/company';
 import { AddCandidateModal, EditCandidateModal, TimesheetPreviewModal, SearchBar } from '@/components/ui';
 
 export default function App() {
@@ -19,6 +19,7 @@ export default function App() {
     const [searchQuery, setSearchQuery] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
     const [monthFilter, setMonthFilter] = useState('');
+    const [viewMode, setViewMode] = useState<'list' | 'kanban'>('list');
 
     // Event handlers
     const handlePreview = (candidate: Candidate, timesheet: Timesheet) => {
@@ -108,17 +109,24 @@ export default function App() {
                     allUploaded={allUploaded}
                 />
 
-                <SearchBar 
-                    searchQuery={searchQuery} 
-                    setSearchQuery={setSearchQuery} 
-                    statusFilter={statusFilter}
-                    setStatusFilter={setStatusFilter}
-                    monthFilter={monthFilter}
-                    setMonthFilter={setMonthFilter}
-                    candidates={candidates}
-                />
+                <div className="flex justify-between items-center mb-4">
+                    <SearchBar 
+                        searchQuery={searchQuery} 
+                        setSearchQuery={setSearchQuery} 
+                        statusFilter={statusFilter}
+                        setStatusFilter={setStatusFilter}
+                        monthFilter={monthFilter}
+                        setMonthFilter={setMonthFilter}
+                        candidates={candidates}
+                    />
+                    <div className="flex gap-2">
+                        <button onClick={() => setViewMode('list')} className={`px-4 py-2 rounded-lg ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-slate-600'}`}>List</button>
+                        <button onClick={() => setViewMode('kanban')} className={`px-4 py-2 rounded-lg ${viewMode === 'kanban' ? 'bg-blue-600 text-white' : 'bg-white text-slate-600'}`}>Kanban</button>
+                    </div>
+                </div>
                 
-                <CandidateList
+                <CompanyView
+                    viewMode={viewMode}
                     candidates={filteredCandidates}
                     onAddTimesheet={handleAddTimesheet}
                     onDownload={handleTimesheetDownload}

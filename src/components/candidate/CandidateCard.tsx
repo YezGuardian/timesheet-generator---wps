@@ -18,6 +18,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
     onDownloadSigned
 }) => {
     const [selectedMonth, setSelectedMonth] = useState('');
+    const [showAllTimesheets, setShowAllTimesheets] = useState(false);
     
     // Generate future month options (next 12 months)
     const generateFutureMonths = () => {
@@ -98,6 +99,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
     }, {} as Record<string, { name: string; timesheets: typeof candidate.timesheets }>);
     
     const monthKeys = Object.keys(timesheetsByMonth).sort().reverse(); // Most recent first
+    const visibleMonthKeys = showAllTimesheets ? monthKeys : monthKeys.slice(0, 1);
     
     return (
         <>
@@ -155,7 +157,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
                     <div className="mt-4">
                         {candidate.timesheets.length > 0 ? (
                             <div className="space-y-4">
-                                {monthKeys.map(monthKey => {
+                                {visibleMonthKeys.map(monthKey => {
                                     const monthData = timesheetsByMonth[monthKey];
                                     return (
                                         <MonthlyTimesheetGroup
@@ -171,6 +173,11 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
                                         />
                                     );
                                 })}
+                                {monthKeys.length > 1 && (
+                                    <button onClick={() => setShowAllTimesheets(!showAllTimesheets)} className="text-sm text-blue-600 hover:underline">
+                                        {showAllTimesheets ? 'Show less' : 'Show all'}
+                                    </button>
+                                )}
                             </div>
                         ) : (
                             <p className="text-sm text-slate-400 italic text-center py-2">No timesheets generated yet.</p>
