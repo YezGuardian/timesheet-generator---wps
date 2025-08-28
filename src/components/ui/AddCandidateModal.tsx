@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { AddCandidateModalProps } from '@/types';
 
-const AddCandidateModal: React.FC<AddCandidateModalProps> = ({ onClose, onAddCandidate }) => {
+const AddCandidateModal: React.FC<AddCandidateModalProps> = ({ onClose, onAddCandidate, candidates }) => {
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
     const [email, setEmail] = useState('');
@@ -16,6 +16,8 @@ const AddCandidateModal: React.FC<AddCandidateModalProps> = ({ onClose, onAddCan
         onAddCandidate({ name, company, email, contactNumber, manager, employeeId });
         onClose();
     };
+
+    const existingCompanies = Array.from(new Set(candidates.map(c => c.company)));
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -43,7 +45,13 @@ const AddCandidateModal: React.FC<AddCandidateModalProps> = ({ onClose, onAddCan
                                 onChange={(e) => setCompany(e.target.value)} 
                                 className="w-full form-input px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
                                 required 
+                                list="company-list"
                             />
+                            <datalist id="company-list">
+                                {existingCompanies.map(comp => (
+                                    <option key={comp} value={comp} />
+                                ))}
+                            </datalist>
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">Employee Email Address</label>

@@ -134,6 +134,7 @@ export default function App() {
                     <AddCandidateModal 
                         onClose={() => setIsModalOpen(false)} 
                         onAddCandidate={addCandidate} 
+                        candidates={candidates}
                     />
                 )}
                 

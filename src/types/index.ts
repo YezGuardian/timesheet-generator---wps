@@ -89,6 +89,7 @@ export interface MonthlyTimesheetGroupProps {
 export interface AddCandidateModalProps {
   onClose: () => void;
   onAddCandidate: (candidate: { name: string; company: string; email: string; contactNumber: string; manager: string; employeeId: string; }) => void;
+  candidates: Candidate[];
 }
 
 export interface TimesheetPreviewModalProps {
