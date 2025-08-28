@@ -1,5 +1,10 @@
 // --- Type Definitions for Timesheet Management Application ---
 
+export interface UploadLog {
+  fileName: string;
+  uploadedAt: string;
+}
+
 export interface Timesheet {
   id: number;
   periodEnding: string;
@@ -10,6 +15,7 @@ export interface Timesheet {
   uploaded?: boolean;
   uploadedFileName?: string;
   uploadedAt?: string;
+  uploadHistory?: UploadLog[];
 }
 
 export interface Candidate {
@@ -22,6 +28,8 @@ export interface Candidate {
   employeeId: string;
   timesheets: Timesheet[];
 }
+
+
 
 // Component Props Types
 export interface HeaderProps {
