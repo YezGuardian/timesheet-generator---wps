@@ -109,7 +109,10 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
                         <div>
                             <h3 className="text-lg font-bold text-slate-900">{candidate.name}</h3>
                             <p className="text-sm text-slate-500">{candidate.email}</p>
-                            <p className="text-xs text-slate-400">ID: {candidate.employeeId} | Manager: {candidate.manager}</p>
+                            <p className="text-xs text-slate-400">
+                                ID: {candidate.employeeId} | Manager: {candidate.manager}
+                                {candidate.workingHours && ` | Hours: ${candidate.workingHours}`}
+                            </p>
                         </div>
                         <div className="flex gap-2">
                             <button 

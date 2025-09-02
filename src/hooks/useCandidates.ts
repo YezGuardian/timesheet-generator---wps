@@ -27,10 +27,10 @@ export const useCandidates = () => {
         }
     }, []);
 
-    const addCandidate = async (candidate: CandidateFormData): Promise<void> => {
+    const addCandidate = async (candidate: CandidateFormData & { workingHours?: string }): Promise<void> => {
         try {
             // Create the new candidate with empty timesheets initially
-            const newCandidateData: CandidateFormData & { timesheets: Timesheet[] } = { ...candidate, timesheets: [] };
+            const newCandidateData: CandidateFormData & { timesheets: Timesheet[]; workingHours?: string } = { ...candidate, timesheets: [] };
             
             // Check if we should auto-generate timesheets for next month
             const currentDate = new Date();
@@ -64,7 +64,7 @@ export const useCandidates = () => {
         }
     };
 
-    const editCandidate = async (candidateId: string, updatedData: CandidateFormData): Promise<void> => {
+    const editCandidate = async (candidateId: string, updatedData: CandidateFormData & { workingHours?: string }): Promise<void> => {
         try {
             const candidateRef = doc(db, 'candidates', candidateId);
             await updateDoc(candidateRef, { ...updatedData });

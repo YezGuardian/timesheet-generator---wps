@@ -26,6 +26,7 @@ export interface Candidate {
   contactNumber: string;
   manager: string;
   employeeId: string;
+  workingHours?: string; // New field for customizable working hours
   timesheets: Timesheet[];
 }
 
@@ -119,4 +120,5 @@ export interface CandidateFormData {
   contactNumber: string;
   manager: string;
   employeeId: string;
+  workingHours?: string;
 }

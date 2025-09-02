@@ -10,10 +10,11 @@ const EditCandidateModal: React.FC<EditCandidateModalProps> = ({ candidate, onCl
     const [contactNumber, setContactNumber] = useState(candidate.contactNumber);
     const [manager, setManager] = useState(candidate.manager);
     const [employeeId, setEmployeeId] = useState(candidate.employeeId);
+    const [workingHours, setWorkingHours] = useState(candidate.workingHours || '08:00 - 16:00'); // New state for working hours
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onEditCandidate({ name, company, email, contactNumber, manager, employeeId });
+        onEditCandidate({ name, company, email, contactNumber, manager, employeeId, workingHours });
     };
 
     return (
@@ -86,6 +87,17 @@ const EditCandidateModal: React.FC<EditCandidateModalProps> = ({ candidate, onCl
                                 onChange={(e) => setEmployeeId(e.target.value)} 
                                 className="w-full form-input px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
                                 required 
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="edit-workingHours" className="block text-sm font-medium text-slate-700 mb-1">Working Hours</label>
+                            <input 
+                                type="text" 
+                                id="edit-workingHours" 
+                                value={workingHours} 
+                                onChange={(e) => setWorkingHours(e.target.value)} 
+                                className="w-full form-input px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                placeholder="e.g., 09:00 - 17:00"
                             />
                         </div>
                     </div>

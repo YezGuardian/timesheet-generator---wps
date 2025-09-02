@@ -126,7 +126,7 @@ const TimesheetPreviewModal: React.FC<TimesheetPreviewModalProps> = ({
                                                 <td className="border border-slate-400 p-1.5">
                                                     {new Date(date).toLocaleDateString('en-CA', { timeZone: 'UTC' })}
                                                 </td>
-                                                <td className="border border-slate-400 p-1.5">08:00 - 16:00</td>
+                                                <td className="border border-slate-400 p-1.5">{candidate.workingHours || '08:00 - 16:00'}</td>
                                                 <td className="border border-slate-400 p-1.5 h-6"></td>
                                                 <td className="border border-slate-400 p-1.5 h-6"></td>
                                                 <td className="border border-slate-400 p-1.5 h-6"></td>

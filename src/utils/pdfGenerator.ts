@@ -136,7 +136,7 @@ export const generatePDF = async (candidate: Candidate, timesheet: Timesheet): P
             tableRows.push([
                 dayLabel,
                 new Date(date).toLocaleDateString('en-CA', { timeZone: 'UTC' }),
-                '08:00 - 16:00',
+                candidate.workingHours || '08:00 - 16:00',
                 '', // Candidate Signature
                 '', // Supervisor Signature
                 '', // Leave Applied
