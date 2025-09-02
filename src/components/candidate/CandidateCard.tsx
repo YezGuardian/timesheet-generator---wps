@@ -20,12 +20,12 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
     const [selectedMonth, setSelectedMonth] = useState('');
     const [showAllTimesheets, setShowAllTimesheets] = useState(false);
     
-    // Generate future month options (next 12 months)
+    // Generate future month options (current month and next 11 months)
     const generateFutureMonths = () => {
         const months = [];
         const currentDate = new Date();
         
-        for (let i = 1; i <= 12; i++) {
+        for (let i = 0; i <= 11; i++) {
             const futureDate = new Date(currentDate);
             futureDate.setMonth(currentDate.getMonth() + i);
             
@@ -140,7 +140,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
                                 className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" 
                                 required
                             >
-                                <option value="">Select a future month...</option>
+                                <option value="">Select current or future month...</option>
                                 {generateFutureMonths().map(({ value, label }) => (
                                     <option key={value} value={value}>{label}</option>
                                 ))}

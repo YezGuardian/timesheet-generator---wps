@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Candidate, Timesheet } from '@/types';
 import { getPendingActionsSummary, areAllTimesheetsUploaded } from '@/utils';
 import { useCandidates, useTimesheets, useAutomaticTimesheetGeneration } from '@/hooks';
@@ -20,6 +20,12 @@ export default function App() {
     const [statusFilter, setStatusFilter] = useState('');
     const [monthFilter, setMonthFilter] = useState('');
     const [viewMode, setViewMode] = useState<'list' | 'kanban'>('list');
+    const [isClient, setIsClient] = useState(false);
+
+    // Set isClient to true after mounting to handle hydration
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     // Event handlers
     const handlePreview = (candidate: Candidate, timesheet: Timesheet) => {
@@ -96,6 +102,11 @@ export default function App() {
 
     if (isLoading) {
         return <div className="flex items-center justify-center min-h-screen bg-slate-50 text-slate-700">Loading data from Firestore...</div>
+    }
+
+    // Render nothing on server, only on client after hydration
+    if (!isClient) {
+        return null;
     }
 
     return (
