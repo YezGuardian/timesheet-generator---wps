@@ -63,7 +63,7 @@ export interface CandidateCardProps extends Omit<CandidateListProps, 'candidates
 export interface EditCandidateModalProps {
   candidate: Candidate;
   onClose: () => void;
-  onEditCandidate: (candidate: { name: string; company: string; email: string; contactNumber: string; manager: string; employeeId: string; }) => void;
+  onEditCandidate: (candidate: { name: string; company: string; email: string; contactNumber: string; manager: string; employeeId: string; workingHours?: string; }) => void;
 }
 
 export interface TimesheetItemProps {
@@ -89,7 +89,7 @@ export interface MonthlyTimesheetGroupProps {
 
 export interface AddCandidateModalProps {
   onClose: () => void;
-  onAddCandidate: (candidate: { name: string; company: string; email: string; contactNumber: string; manager: string; employeeId: string; }) => void;
+  onAddCandidate: (candidate: { name: string; company: string; email: string; contactNumber: string; manager: string; employeeId: string; workingHours?: string; }) => void;
   candidates: Candidate[];
 }
 
